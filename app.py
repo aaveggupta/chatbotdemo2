@@ -42,7 +42,7 @@ def processRequest(req):
 	 
     intent = result.get("intent").get('displayName')
        
-    fulfillmentText= "WORKING"
+    fulfillmentText= "WORKING "+ Petal_length
     #log.write_log(sessionID, "Bot Says: "+fulfillmentText)
     return {
             "fulfillmentText": fulfillmentText
