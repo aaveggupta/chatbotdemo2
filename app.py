@@ -38,14 +38,7 @@ def webhook():
 
 # processing the request from dialogflow
 def processRequest(req):
-
-    #sessionID=req.get('responseId')
-    result = req.get("queryResult")
-    #user_says=result.get("queryText")
-    #log.write_log(sessionID, "User Says: "+user_says)
-    parameters = result.get("parameters")
-    user_symptoms_list = parameters.get("Disease")
-	
+    
     symptom=np.zeros([526],dtype=float)
     finaldataset=pd.read_csv('finaldataset.csv')
     labels=finaldataset['prognosis']
@@ -55,37 +48,38 @@ def processRequest(req):
     model=MultinomialNB()
     model.fit(x_train,y_train)
     Alldiseases=model.classes_.tolist()
-    
+
     indexes=[]
-    for i in range(len(model_symptoms)):
-        if model_symptoms[i] in user_symptoms_list:
+    for i in range(len(x_train.columns)):
+        if x_train.columns[i] in user_symptoms:
             indexes.append(i)
-    for i in indexes:
-        symptom[i]=1
-    top3=[]
-    probab=model.predict_proba([symptom]).tolist()  
-    for j in range(3):
-        max=-10000000000
-        h=0
-        for i in range(len(probab[0])):
-            if probab[0][i]>max:
-                max=probab[0][i]
-                h=i 
-    k=[]
-    k.append(Alldiseases[h])
-    k.append(probab[0][h])
-    top3.append(k)
-    probab[0][h]=-1
+        for i in indexes:
+            symptom[i]=1
+        top3=[]
+        probab=model.predict_proba([symptom]).tolist()
+        for j in range(3):
+            max=-10000000000
+            h=0
+            for i in range(len(probab[0])):
+                if probab[0][i]>max:
+                    max=probab[0][i]
+                    h=i
+            k=[]
+            k.append(Alldiseases[h])
+            k.append(probab[0][h])
+            top3.append(k)
+            probab[0][h]=-1
 
     result=""
     for i in top3:
         result+="Probability of "+str(i[0])+"is "+"{:2.3f}".format((i[1]*100))+'%'+'\n'
-       
-    fulfillmentText= result
-    #log.write_log(sessionID, "Bot Says: "+fulfillmentText)
+    print(result)
+
+    fulfillmentText = result
+    # log.write_log(sessionID, "Bot Says: "+fulfillmentText)
     return {
-            "fulfillmentText": fulfillmentText
-     }
+        "fulfillmentText": fulfillmentText
+    }
     #else:
     #    log.write_log(sessionID, "Bot Says: " + result.fulfillmentText)
 
