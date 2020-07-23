@@ -57,11 +57,11 @@ def processRequest(req):
         #if(output==2):
          #   flowr = 'Virginica'
        
-        fulfillmentText= "WORKING"
+     fulfillmentText= "WORKING"
         #log.write_log(sessionID, "Bot Says: "+fulfillmentText)
-        return {
+      return {
             "fulfillmentText": fulfillmentText
-        }
+      }
     #else:
     #    log.write_log(sessionID, "Bot Says: " + result.fulfillmentText)
 
