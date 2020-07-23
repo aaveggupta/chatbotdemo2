@@ -42,20 +42,20 @@ def processRequest(req):
 	 
     intent = result.get("intent").get('displayName')
     
-   """ if (intent=='IrisData'):
-        prediction = model.predict(final_features)
+   # if (intent=='IrisData'):
+    #    prediction = model.predict(final_features)
     
-        output = round(prediction[0], 2)
+     #   output = round(prediction[0], 2)
     
     	
-        if(output==0):
-            flowr = 'Setosa'
+      #  if(output==0):
+          #  flowr = 'Setosa'
     
-        if(output==1):
-            flowr = 'Versicolour'
+       # if(output==1):
+        #    flowr = 'Versicolour'
         
-        if(output==2):
-            flowr = 'Virginica' """
+        #if(output==2):
+         #   flowr = 'Virginica'
        
         fulfillmentText= "WORKING"
         #log.write_log(sessionID, "Bot Says: "+fulfillmentText)
