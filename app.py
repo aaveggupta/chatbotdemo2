@@ -78,7 +78,7 @@ def processRequest(req):
     probab[0][h]=-1
 
     result=""
-    for i in Top3diseasepred:
+    for i in top3:
         result+="Probability of "+str(i[0])+"is "+"{:2.3f}".format((i[1]*100))+'%'+'\n'
        
     fulfillmentText= result
