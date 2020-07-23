@@ -39,6 +39,13 @@ def webhook():
 # processing the request from dialogflow
 def processRequest(req):
     
+    #sessionID=req.get('responseId')
+    result = req.get("queryResult")
+    #user_says=result.get("queryText")
+    #log.write_log(sessionID, "User Says: "+user_says)
+    parameters = result.get("parameters")
+    user_symptoms = parameters.get("Disease")
+    
     symptom=np.zeros([526],dtype=float)
     finaldataset=pd.read_csv('finaldataset.csv')
     labels=finaldataset['prognosis']
@@ -73,7 +80,6 @@ def processRequest(req):
     result=""
     for i in top3:
         result+="Probability of "+str(i[0])+"is "+"{:2.3f}".format((i[1]*100))+'%'+'\n'
-    print(result)
 
     fulfillmentText = result
     # log.write_log(sessionID, "Bot Says: "+fulfillmentText)
