@@ -41,27 +41,12 @@ def processRequest(req):
     Petal_length=parameters.get("Disease")
 	 
     intent = result.get("intent").get('displayName')
-    
-   # if (intent=='IrisData'):
-    #    prediction = model.predict(final_features)
-    
-     #   output = round(prediction[0], 2)
-    
-    	
-      #  if(output==0):
-          #  flowr = 'Setosa'
-    
-       # if(output==1):
-        #    flowr = 'Versicolour'
-        
-        #if(output==2):
-         #   flowr = 'Virginica'
        
-     fulfillmentText= "WORKING"
-        #log.write_log(sessionID, "Bot Says: "+fulfillmentText)
-      return {
+    fulfillmentText= "WORKING"
+    #log.write_log(sessionID, "Bot Says: "+fulfillmentText)
+    return {
             "fulfillmentText": fulfillmentText
-      }
+     }
     #else:
     #    log.write_log(sessionID, "Bot Says: " + result.fulfillmentText)
 
