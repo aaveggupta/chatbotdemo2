@@ -79,7 +79,7 @@ def processRequest(req):
 
     result=""
     for i in top3:
-        result+="Probability of "+str(i[0])+"is "+"{:2.3f}".format((i[1]*100))+'%'+'\n'
+        result+="Probability of "+str(i[0])+"is "+"{:2.3f}".format((i[1]*100))+"%\n"
 
     fulfillmentText = result
     # log.write_log(sessionID, "Bot Says: "+fulfillmentText)
